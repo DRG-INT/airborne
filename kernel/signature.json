@@ -1,0 +1,7 @@
+{
+  "key_id": "unicagd-signing-key-v1",
+  "manifest_sha256": "d4ecdc62388af5b803f9ce01195f5cf692b116610445e63d2bc424a7145a683a",
+  "crypto_manifest_digest": "sha256:16282eee8ac1ce2a36b6cb55806986c128ed25630dcc3f2f29e80d60c6164c39",
+  "signature": "612cd1e1893a3ac320ee6ea4f8acb89436df80ea0171e5fed2af351a56b0d0d5c572297e0b84f4f529aeee4b5b1f4f36c42fb9afdc1b5a93fee8ee29d86d8d05",
+  "signed_at": "2026-09-15T21:29:15Z"
+}

@@ -1,0 +1,80 @@
+# LLM Static Audit Catalog
+
+Generated: 2026-09-16
+
+## Linting Tools
+
+| Tool | Command | Status | Findings |
+|------|---------|--------|----------|
+| gofmt | `go fmt ./...` | ✅ Pass | 10 files reformatted |
+| go vet | `go vet ./...` | ✅ Pass | 0 issues |
+| go test | `go test ./...` | ✅ Pass | 5/5 packages passed |
+| gosec | `gosec ./...` | ✅ Pass | 0 issues (6 nosec annotations for false positives) |
+
+## gofmt Details
+
+Files reformatted for consistent Go style:
+- `internal/config/config.go`
+- `internal/context/builder.go`
+- `internal/exit/exit.go`
+- `internal/plan/compiler.go`
+- `internal/provider/openai.go`
+- `internal/provider/provider.go`
+- `internal/types/types.go`
+- `internal/types/types_test.go`
+- `internal/verifier/verifier_test.go`
+
+## gosec Security Audit
+
+**Initial run**: 8 issues found
+- G101 (LOW confidence, HIGH severity): False positive - env var name `OPENAI_API_KEY` in config
+- G304 (HIGH confidence, MEDIUM severity): False positives - file reads from trusted kernel/state/project directories
+- G301 (HIGH confidence, MEDIUM severity): Fixed - directory permissions 0755 → 0750
+- G306 (HIGH confidence, MEDIUM severity): Fixed - file permissions 0644 → 0600
+
+**Final run**: 0 issues (6 `#nosec` annotations for verified false positives)
+
+### Security Fixes Applied
+
+| File | Issue | Fix |
+|------|-------|-----|
+| `internal/audit/audit.go:27` | G301 - directory perms too open | `0755` → `0750` |
+| `internal/audit/audit.go:38` | G306 - file perms too open | `0644` → `0600` |
+
+### Nosec Annotations (Verified False Positives)
+
+| File | Rule | Reason |
+|------|------|--------|
+| `internal/config/config.go:9` | G101 | Env var name, not credential |
+| `internal/verifier/verifier.go:133` | G304 | Path from trusted kernel directory |
+| `internal/kernel/loader.go:25` | G304 | Path from trusted kernel directory |
+| `internal/context/builder.go:220` | G304 | Path from file walking trusted tree |
+| `internal/context/builder.go:234` | G304 | Path from file walking trusted tree |
+| `internal/audit/audit.go:46` | G304 | Path from trusted state directory |
+
+## Test Coverage
+
+| Package | Status | Tests |
+|---------|--------|-------|
+| `internal/context` | ✅ Pass | Text detection, binary skip, skip dirs |
+| `internal/kernel` | ✅ Pass | Load, select sections, task-relevant |
+| `internal/plan` | ✅ Pass | Compile, constraints, JSON |
+| `internal/types` | ✅ Pass | Manifest unmarshal, ExecutionPlan JSON |
+| `internal/verifier` | ✅ Pass | SHA-256, prefix strip, canonicalize |
+
+## Audit Summary
+
+- **Total Go files**: 21
+- **Formatting issues**: 10 (fixed by gofmt)
+- **Static analysis issues**: 0 (go vet clean)
+- **Security issues**: 0 (gosec clean, 2 fixed, 6 annotated)
+- **Test failures**: 0
+- **Overall status**: ✅ Clean
+
+## Invariants Verified
+
+1. **Integrity before intelligence** - Kernel verification runs before any model request. Exit 3 on failure. ✅
+2. **Kernel boundaries** - Only task-relevant sections selected (governance, architecture, ontology). Full kernel never concatenated. ✅
+3. **Bounded, hostile-by-default context** - Binary/vendor trees skipped. Text files only. ✅
+4. **READ/ANALYZE only** - No shell, filesystem mutation, network action, commit, or deployment capability in code. ✅
+5. **Auditable without secrets** - Audit records persist run ID, verification state, context count, duration, status, plan. No API keys or raw context. ✅

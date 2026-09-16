@@ -1,0 +1,6 @@
+ab
+.ab
+.state
+*.test
+*.out
+coverage.txt

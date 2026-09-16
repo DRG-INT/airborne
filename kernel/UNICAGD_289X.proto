@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package UNICAGD_288X;
+
+option go_package = "github.com/unicagd/aml/v2;unicagd289x";
+
+message KernelManifest {
+  string build_id = 1;
+  string schema_version = 2;
+  string proto_package = 3;
+  repeated Artifact artifacts = 4;
+}
+
+message Artifact {
+  string name = 1;
+  string sha256 = 2;
+  uint64 size = 3;
+}
+
+message RuntimeSpec {
+  string build_id = 1;
+  string format = 2;
+  string runtime_format = 3;
+  map<string, GovernanceSection> sections = 4;
+}
+
+message GovernanceSection {
+  string title = 1;
+  string summary = 2;
+  string precedence = 3;
+}
+
+message ArchitectureSpec {
+  string build_id = 1;
+  string architecture_version = 2;
+}
+
+message OntologySpec {
+  string build_id = 1;
+  repeated string entity_types = 2;
+}

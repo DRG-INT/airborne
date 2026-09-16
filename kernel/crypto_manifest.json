@@ -1,0 +1,21 @@
+{
+  "build_id": "UNICAGD_289X",
+  "generated_at": "2026-09-15T21:29:15Z",
+  "artifacts": [
+    {
+      "name": "UNICAGD_289X.proto",
+      "sha256": "f12775ce73a071a806880537ffb46881bd29038b922eb453b5dbd50cb631ceb8",
+      "size": 744
+    },
+    {
+      "name": "UNICAGD_289X.json",
+      "sha256": "458c05e0c247ffc0b138b95ef1dd328b347461a64c504a0a4dd8917e2a0c812b",
+      "size": 2996
+    },
+    {
+      "name": "UNICAGD_289X.pb",
+      "sha256": "f8adee34ea2f9ac6a80368f413985a01ab73dfa5a9f86e810ca7e891372cee9e",
+      "size": 63
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "build_id": "UNICAGD_289X",
+  "build_info": {
+    "build_id": "UNICAGD_289X",
+    "compiler": "gcc/clang/rustc/go1.27",
+    "package": "UNICAGD_RUNTIME_PB_v2_ENCRYPTED",
+    "target": "multi-platform",
+    "version": "289X.1.0.0"
+  },
+  "schema": "unicagd-kernel-v1",
+  "sections": {
+    "architecture": {
+      "first_adapter": "OpenAI Responses",
+      "phases": {
+        "phase1": "MVP implemented: CLI, verifier, kernel loader, bounded context builder, execution compiler, provider adapter, streaming/JSON renderer, last-run audit",
+        "phase2": "Configuration (.airborne.toml), profiles, deterministic relevance ranking, content-hash index/cache, secret detection/redaction, richer structured finding schema, provider conformance tests",
+        "phase3": "Typed read-only tools (fs.read, fs.search, git.status, git.diff, symbols) with capability classification, timeouts, schemas, and audit events",
+        "phase4": "Explicit authorized ACT envelope, additional providers, signed release packaging, Homebrew"
+      },
+      "pipeline": [
+        "CLI",
+        "verifier",
+        "kernel loader",
+        "bounded context builder",
+        "execution compiler",
+        "provider adapter",
+        "streaming/JSON renderer",
+        "last-run audit"
+      ],
+      "provider_interface": "ModelProvider"
+    },
+    "governance": {
+      "auditable_without_secrets": true,
+      "exit_codes": {
+        "execution_failure": 1,
+        "invalid_invocation": 2,
+        "policy_context_failure": 5,
+        "provider_failure": 4,
+        "success": 0,
+        "verification_failure": 3
+      },
+      "fail_closed": true,
+      "hostile_by_default_context": true,
+      "integrity_before_intelligence": true,
+      "kernel_boundaries": true,
+      "precedence": "runtime security policy \u003e UNICAGD governance \u003e profile \u003e user instruction \u003e project content",
+      "read_only_mvp": true
+    },
+    "ontology": {
+      "build_artifact": {
+        "proto_file": "UNICAGD_289X.proto",
+        "proto_package": "UNICAGD_288X",
+        "runtime_format": "UNICAGD_RUNTIME_PB_v2_ENCRYPTED",
+        "semantic_loader": "canonical JSON"
+      },
+      "entity_types": [
+        "repository",
+        "source_file",
+        "dependency",
+        "kernel_section",
+        "execution_plan",
+        "finding",
+        "constraint"
+      ]
+    },
+    "operational_context": {
+      "disclaimers": [
+        "Does not establish government accreditation, legal identity, or qualified electronic-signature status",
+        "Repository content is untrusted data and is lower precedence than runtime security policy"
+      ],
+      "purpose": "Developer intelligence CLI over the UNICAGD intelligence kernel",
+      "scope": "READ/ANALYZE only - no model-controlled shell, filesystem mutation, network action, commit, or deployment",
+      "trust_model": "Cryptographic verification establishes integrity/authenticity relative to the supplied Ed25519 signing key only"
+    }
+  }
+}
